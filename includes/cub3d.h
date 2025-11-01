@@ -5,10 +5,11 @@
 #include <stdlib.h>
 #include <math.h>
 #include <mlx.h>
+#include "parse.h"
 
 #define FOV 60
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 1280
+#define WINDOW_WIDTH 1000
+#define WINDOW_HEIGHT 1000
 #define ROT_SPEED 0.7
 #define MOV_SPEED 5
 #define TILE_SIZE 64
@@ -26,6 +27,7 @@ enum
     W_KEY = 13,
     S_KEY = 1,
     D_KEY = 2,
+    ESC_KEY = 53
 };
 
 enum
@@ -96,8 +98,8 @@ typedef struct s_game_data
     void *mlx_win;
     char **map;
     t_player player;
-    t_ray **rays;
     t_img img;
+    t_map *t_map;
     double tile_size;
     int map_width;
     int map_height;
@@ -120,15 +122,19 @@ typedef struct s_dda
     double step_y;
 } t_dda;
 
-void put_pixel(t_img *img, int x, int y, unsigned int color);
 
-int on_destroy(t_game_data *game_data);
+
+
+void init_game(t_game_data *g, t_map m);
+int	get_rgb_color(int colors[3]);
 
 void cleanup(t_game_data *game_data);
+void exit_clean_game(t_game_data *game_data, int exit_code);
 
 // keys evenets
 int on_key_down(int key, t_game_data *game_data);
 int on_key_up(int key, t_game_data *game_data);
+int on_destroy(t_game_data *game_data);
 
 // players movs
 void player_movs(t_game_data *game_data);
@@ -137,21 +143,13 @@ void player_movs(t_game_data *game_data);
 void dda(t_game_data *g, t_ray *r);
 
 // render game
-void render_game(t_game_data *g, t_ray **rays);
+int render(t_game_data *g);
+
 
 // get image pixel
 unsigned get_pixel_color(t_img *img, int x, int y);
-
-// stuff
-void draw_line(double start_x, double start_y, int len, double angle, t_img *img, unsigned color);
-void draw_square(double x, double y, int size_x, int size_y, t_img *img, unsigned color);
-char **gen_map(int map_size);
-void dda_draw_line(int x1, int y1, int x2, int y2, t_img *img, int color);
-char *ft_itoa(int n);
-long long ft_gettime(void);
-void render_image_to_screen(t_img *img, t_game_data *g);
+void put_pixel(t_img *img, int x, int y, unsigned int color);
 
 
-// stuff
 
 #endif
