@@ -6,7 +6,7 @@
 /*   By: jel-yous <jel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 00:23:52 by jel-yous          #+#    #+#             */
-/*   Updated: 2025/11/02 00:54:51 by jel-yous         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:36:07 by jel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,8 @@ static void	set_player_angle(char dir, t_game_data *g)
 
 static void	error_loading_textures(t_game_data *g)
 {
-	if (g->north_tex.img != NULL)
-		mlx_destroy_image(g->mlx, g->north_tex.img);
-	if (g->east_tex.img != NULL)
-		mlx_destroy_image(g->mlx, g->east_tex.img);
-	if (g->west_tex.img != NULL)
-		mlx_destroy_image(g->mlx, g->west_tex.img);
-	if (g->south_tex.img != NULL)
-		mlx_destroy_image(g->mlx, g->south_tex.img);
 	write(2, "Error\nCan't load the textures\n", 30);
-	cleanup(g);
-	exit(1);
+	exit_clean_game(g, 1);
 }
 
 static void	load_textures_2(t_game_data *g)
@@ -94,6 +85,8 @@ void	init_game(t_game_data *g, t_map m)
 	g->floor_color = get_rgb_color(m.floor_color);
 	g->ceil_color = get_rgb_color(m.ceiling_color);
 	g->img.img = mlx_new_image(g->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!g->img.img)
+		exit_clean_game(g, 1);
 	g->img.addr = mlx_get_data_addr(g->img.img, &g->img.bits_per_pixel,
 			&g->img.line_length, &g->img.endian);
 	load_textures(g);

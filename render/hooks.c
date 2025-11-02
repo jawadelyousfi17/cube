@@ -6,7 +6,7 @@
 /*   By: jel-yous <jel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 00:22:16 by jel-yous          #+#    #+#             */
-/*   Updated: 2025/11/02 00:54:51 by jel-yous         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:30:19 by jel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	on_destroy(t_game_data *game_data)
 {
 	exit_clean_game(game_data, 0);
-	return (0);
+	return (1);
 }
 
 int	on_key_down(int key, t_game_data *game_data)

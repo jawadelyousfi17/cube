@@ -6,7 +6,7 @@
 /*   By: jel-yous <jel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 00:35:46 by jel-yous          #+#    #+#             */
-/*   Updated: 2025/11/02 00:54:51 by jel-yous         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:45:29 by jel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@ int	main(int argc, char **argv)
 	t_game_data	game_data;
 	t_map		map;
 
-	init_map(argc, argv, &map);
 	ft_bzero(&game_data, sizeof(t_game_data));
 	game_data.mlx = mlx_init();
+	if (!game_data.mlx)
+		return (1);
 	game_data.mlx_win = mlx_new_window(game_data.mlx, WINDOW_WIDTH,
-			WINDOW_HEIGHT, "cube 3d");
-	if (!game_data.mlx || !game_data.mlx_win)
-		return (free_map(&map), 1);
+			WINDOW_HEIGHT, "cub 3d");
+	if (!game_data.mlx_win)
+		return (1);
+	init_map(argc, argv, &map);
 	init_game(&game_data, map);
 	mlx_hook(game_data.mlx_win, ON_DESTROY, 0, on_destroy, &game_data);
 	mlx_hook(game_data.mlx_win, ON_KEYDOWN, 0, on_key_down, &game_data);

@@ -6,7 +6,7 @@
 /*   By: jel-yous <jel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 00:42:31 by jel-yous          #+#    #+#             */
-/*   Updated: 2025/11/02 00:54:51 by jel-yous         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:47:54 by jel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,26 @@ void	put_pixel(t_img *img, int x, int y, unsigned int color)
 				+ x * (img->bits_per_pixel / 8))) = color;
 }
 
-void	cleanup(t_game_data *game_data)
+void	cleanup(t_game_data *g)
 {
-	mlx_destroy_image(game_data->mlx, game_data->img.img);
-	mlx_destroy_window(game_data->mlx, game_data->mlx_win);
-	free_map(game_data->t_map);
+	if (g->north_tex.img != NULL)
+		mlx_destroy_image(g->mlx, g->north_tex.img);
+	if (g->east_tex.img != NULL)
+		mlx_destroy_image(g->mlx, g->east_tex.img);
+	if (g->west_tex.img != NULL)
+		mlx_destroy_image(g->mlx, g->west_tex.img);
+	if (g->south_tex.img != NULL)
+		mlx_destroy_image(g->mlx, g->south_tex.img);
+	if (g->img.img != NULL)
+		mlx_destroy_image(g->mlx, g->img.img);
+	mlx_destroy_window(g->mlx, g->mlx_win);
+	free_map(g->t_map);
 }
 
 unsigned int	get_pixel_color(t_img *img, int x, int y)
 {
-	return (*(unsigned *)(img->addr + (y * img->line_length
-			+ x * (img->bits_per_pixel / 8))));
+	return (*(unsigned *)(img->addr
+		+ (y * img->line_length + x * (img->bits_per_pixel / 8))));
 }
 
 void	exit_clean_game(t_game_data *game_data, int exit_code)

@@ -6,7 +6,7 @@
 /*   By: jel-yous <jel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 00:39:24 by jel-yous          #+#    #+#             */
-/*   Updated: 2025/11/02 00:54:51 by jel-yous         ###   ########.fr       */
+/*   Updated: 2025/11/02 01:33:31 by jel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	draw_floor_ceiling(int start, int end, t_game_data *g, int x)
 	}
 }
 
-static void	render_game(t_game_data *g, t_ray *ray, int i)
+static void	draw_wall(t_game_data *g, t_ray *ray, int i)
 {
 	double	factor;
 	int		line_height;
@@ -51,7 +51,7 @@ static void	render_game(t_game_data *g, t_ray *ray, int i)
 
 	line_height = (int)(((WINDOW_WIDTH / (2 * tan(FOV / 2 * M_PI / 180))))
 			* TILE_SIZE) / (ray->distance * cos(-ray->angle + g->player.angle));
-	draw_start = -line_height / 2 + WINDOW_HEIGHT / 2;
+	draw_start = WINDOW_HEIGHT / 2 - line_height / 2;
 	wall_s = draw_start;
 	if (draw_start < 0)
 		draw_start = 0;
@@ -78,7 +78,7 @@ static void	cast_rays(t_game_data *g)
 	{
 		r.angle += (FOV * M_PI / 180) / WINDOW_WIDTH;
 		dda(g, &r);
-		render_game(g, &r, i);
+		draw_wall(g, &r, i);
 		i++;
 	}
 }

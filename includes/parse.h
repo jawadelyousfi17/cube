@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elben-id <elben-id@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jel-yous <jel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 09:34:09 by elben-id          #+#    #+#             */
-/*   Updated: 2025/10/25 09:34:12 by elben-id         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:43:15 by jel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef PARSE_H
+# define PARSE_H
 
 # include <fcntl.h>
 # include <unistd.h>
