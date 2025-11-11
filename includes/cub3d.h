@@ -6,7 +6,7 @@
 /*   By: jel-yous <jel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 19:36:32 by jel-yous          #+#    #+#             */
-/*   Updated: 2025/11/02 19:42:52 by jel-yous         ###   ########.fr       */
+/*   Updated: 2025/11/03 20:47:56 by jel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include "parse.h"
 
 # define FOV 60
-# define WINDOW_WIDTH 1000
-# define WINDOW_HEIGHT 1000
+# define WINDOW_WIDTH 1600
+# define WINDOW_HEIGHT 900
 # define ROT_SPEED 0.7
 # define MOV_SPEED 5
 # define TILE_SIZE 64
