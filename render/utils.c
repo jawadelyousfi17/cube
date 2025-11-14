@@ -6,7 +6,7 @@
 /*   By: jel-yous <jel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 00:42:31 by jel-yous          #+#    #+#             */
-/*   Updated: 2025/11/02 19:47:54 by jel-yous         ###   ########.fr       */
+/*   Updated: 2025/11/11 19:46:33 by jel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	put_pixel(t_img *img, int x, int y, unsigned int color)
 				+ x * (img->bits_per_pixel / 8))) = color;
 }
 
-void	cleanup(t_game_data *g)
+static void	cleanup(t_game_data *g)
 {
 	if (g->north_tex.img != NULL)
 		mlx_destroy_image(g->mlx, g->north_tex.img);
@@ -30,20 +30,21 @@ void	cleanup(t_game_data *g)
 		mlx_destroy_image(g->mlx, g->south_tex.img);
 	if (g->img.img != NULL)
 		mlx_destroy_image(g->mlx, g->img.img);
-	mlx_destroy_window(g->mlx, g->mlx_win);
+	if (g->mlx_win != NULL)
+		mlx_destroy_window(g->mlx, g->mlx_win);
 	free_map(g->t_map);
-}
-
-unsigned int	get_pixel_color(t_img *img, int x, int y)
-{
-	return (*(unsigned *)(img->addr
-		+ (y * img->line_length + x * (img->bits_per_pixel / 8))));
 }
 
 void	exit_clean_game(t_game_data *game_data, int exit_code)
 {
 	cleanup(game_data);
 	exit(exit_code);
+}
+
+unsigned int	get_pixel_color(t_img *img, int x, int y)
+{
+	return (*(unsigned *)(img->addr
+		+ (y * img->line_length + x * (img->bits_per_pixel / 8))));
 }
 
 int	get_rgb_color(int colors[3])

@@ -6,13 +6,13 @@
 /*   By: jel-yous <jel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 00:39:24 by jel-yous          #+#    #+#             */
-/*   Updated: 2025/11/02 01:33:31 by jel-yous         ###   ########.fr       */
+/*   Updated: 2025/11/11 19:48:34 by jel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static unsigned int	wall_color(t_ray *r, double factor, t_game_data *g)
+static unsigned int	get_wall_color(t_ray *r, double factor, t_game_data *g)
 {
 	if (r->direction == NORTH)
 		return (get_pixel_color(&g->north_tex, (1 - r->wall_x) * g->north_tex.w,
@@ -62,7 +62,7 @@ static void	draw_wall(t_game_data *g, t_ray *ray, int i)
 	while (draw_start <= draw_end)
 	{
 		factor = (double)(draw_start - wall_s) / (line_height);
-		put_pixel(&g->img, i, draw_start, wall_color(ray, factor, g));
+		put_pixel(&g->img, i, draw_start, get_wall_color(ray, factor, g));
 		draw_start++;
 	}
 }

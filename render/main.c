@@ -6,7 +6,7 @@
 /*   By: jel-yous <jel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 00:35:46 by jel-yous          #+#    #+#             */
-/*   Updated: 2025/11/11 19:10:36 by jel-yous         ###   ########.fr       */
+/*   Updated: 2025/11/11 19:43:55 by jel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,14 @@ static void	init_map(int argc, char **argv, t_map *map)
 	}
 }
 
+void f()
+{
+	system("leaks cub");
+}
+
 int	main(int argc, char **argv)
 {
+	atexit(f);
 	t_game_data	game_data;
 	t_map		map;
 
@@ -37,12 +43,12 @@ int	main(int argc, char **argv)
 	ft_bzero(&game_data, sizeof(t_game_data));
 	game_data.mlx = mlx_init();
 	if (!game_data.mlx)
-		return (free_map(&map), 1);
-	game_data.mlx_win = mlx_new_window(game_data.mlx, WINDOW_WIDTH,
-			WINDOW_HEIGHT, "cub 3d");
-	if (!game_data.mlx_win)
-		return (free_map(&map), 1);
+		exit_clean_game(&game_data, 1);
 	init_game(&game_data, map);
+	game_data.mlx_win = mlx_new_window(game_data.mlx, WINDOW_WIDTH,
+			WINDOW_HEIGHT, "cub3D");
+	if (!game_data.mlx_win)
+		exit_clean_game(&game_data, 1);
 	mlx_hook(game_data.mlx_win, ON_DESTROY, 0, on_destroy, &game_data);
 	mlx_hook(game_data.mlx_win, ON_KEYDOWN, 0, on_key_down, &game_data);
 	mlx_hook(game_data.mlx_win, ON_KEYUP, 0, on_key_up, &game_data);

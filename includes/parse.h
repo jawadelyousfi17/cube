@@ -6,7 +6,7 @@
 /*   By: jel-yous <jel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 09:34:09 by elben-id          #+#    #+#             */
-/*   Updated: 2025/11/11 19:07:45 by jel-yous         ###   ########.fr       */
+/*   Updated: 2025/11/11 19:28:22 by jel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,42 +47,34 @@ typedef struct s_map
 	int		c_set;
 }	t_map;
 
-/* parser: main entry */
 int		parse_cub_file(char *filename, t_map *map);
 
-/* parser helpers exported across parser files */
 int		parse_color_line(char *line, int *color);
 int		parse_identifier_line(char *line, t_map *map);
 int		parse_identifier_line2(char *line, t_map *map);
 
-/* validate.c */
 int		validate_map(t_map *map);
 
-/* validate_helper.c */
 int		is_allowed(char c);
 int		scan_row_for_player(t_map *map, int y);
 int		locate_player(t_map *map);
 int		cell_is_enclosed(t_map *map, int x, int y);
 void	fill_spaces_with_walls(t_map *map);
 
-/* utils.c */
 t_line	*read_file_to_list(char *filename);
 int		build_grid_from_list(t_line *start, t_map *map);
 void	free_list(t_line *head);
 void	free_map(t_map *map);
-void	error_exit(char *message);
+void	print_error(char *message);
 
-/* helpers.c */
 size_t	ft_strlen(char *s);
 char	*ft_strdup(char *s1);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 int		ft_atoi_simple(char *s);
 void	ft_bzero(void *s, size_t n);
 
-/* get_next_line.c */
 int		get_next_line(int fd, char **line);
 
-/* gnl utility (append helper) */
 char	*append_char(char *buf, char c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jel-yous <jel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 19:36:32 by jel-yous          #+#    #+#             */
-/*   Updated: 2025/11/03 20:47:56 by jel-yous         ###   ########.fr       */
+/*   Updated: 2025/11/11 19:50:07 by jel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <math.h>
 # include <mlx.h>
-# include <stdlib.h>
-# include <stdio.h>
 # include "parse.h"
 
 # define FOV 60
@@ -26,7 +24,7 @@
 # define MOV_SPEED 5
 # define TILE_SIZE 64
 
-enum
+enum e_keys_events
 {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
@@ -40,7 +38,7 @@ enum
 	ESC_KEY = 53
 };
 
-enum
+enum e_directions
 {
 	NORTH,
 	SOUTH,
@@ -78,13 +76,9 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	double	x;
-	double	y;
 	double	distance;
-	int		side;
 	double	angle;
 	int		direction;
-	int		hit;
 	double	wall_x;
 }	t_ray;
 
@@ -120,7 +114,6 @@ typedef struct s_dda
 
 void			init_game(t_game_data *g, t_map m);
 int				get_rgb_color(int colors[3]);
-void			cleanup(t_game_data *game_data);
 void			exit_clean_game(t_game_data *game_data, int exit_code);
 int				on_key_down(int key, t_game_data *game_data);
 int				on_key_up(int key, t_game_data *game_data);
