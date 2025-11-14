@@ -69,6 +69,8 @@ void	print_error(char *message);
 
 size_t	ft_strlen(char *s);
 char	*ft_strdup(char *s1);
+char	*ft_strrchr(char *s, int c);
+int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 int		ft_atoi_simple(char *s);
 void	ft_bzero(void *s, size_t n);
